@@ -1,17 +1,20 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import { withStyles } from '@material-ui/core/styles'
+import withStyles from 'react-jss'
 import ColumnsHints from './ColumnsHints'
 import RowHints from './RowHints'
 import Square from './Square'
 
 const styles = theme => ({
   container: {
-    display: 'flex',
+    margin: 8,
+    padding: 8,
+    display: 'inline-flex',
     flexDirection: 'column'
   },
   row: {
-    display: 'flex'
+    display: 'inline-flex',
+    alignItems: 'flex-start'
   }
 })
 

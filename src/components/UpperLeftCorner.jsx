@@ -1,5 +1,5 @@
 import React from 'react'
-import { withStyles } from '@material-ui/core/styles'
+import withStyles from 'react-jss'
 
 // Upper left corner of a Nonogram puzzle
 // An ugly/hacky way to align the column hints

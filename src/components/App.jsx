@@ -1,14 +1,23 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import Typography from '@material-ui/core/Typography'
+import withStyles from 'react-jss'
 import Nonogram from './Nonogram'
 
-const App = ({nonogram}) => {
+const styles = theme => ({
+  app: {
+    fontFamily: ['Roboto', 'Arial', 'sans-serif'],
+    textAlign: 'center',
+    color: theme.grey[800]
+  }
+})
+
+const App = ({classes, nonogram}) => {
   return (
-    <div>
-      <Typography variant='title'>
-        NONOGRAMS!
-      </Typography>
+    <div className={classes.app}>
+      <h1>NONOGRAMS!</h1>
+      <h3>
+        <a href='https://wikipedia.org/wiki/Nonogram'>What's a Nonogram?</a>
+      </h3>
       <Nonogram />
     </div>
   )
@@ -17,4 +26,4 @@ const App = ({nonogram}) => {
 export default connect(
   (state) => state,
   {}
-)(App)
+)(withStyles(styles)(App))

@@ -1,9 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import { withStyles } from '@material-ui/core/styles'
+import withStyles from 'react-jss'
 import UpperLeftCorner from './UpperLeftCorner'
-import red from '@material-ui/core/colors/red'
-import blue from '@material-ui/core/colors/blue'
 
 const styles = theme => ({
   container: {
@@ -24,10 +22,10 @@ const styles = theme => ({
     marginBottom: 4
   },
   right: {
-    color: blue[400]
+    color: '#1DE9B6'
   },
   wrong: {
-    color: red[600]
+    color: '#DD2C00'
   }
 })
 

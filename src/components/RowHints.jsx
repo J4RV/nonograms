@@ -1,8 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import { withStyles } from '@material-ui/core/styles'
-import red from '@material-ui/core/colors/red'
-import blue from '@material-ui/core/colors/blue'
+import withStyles from 'react-jss'
 
 const styles = theme => ({
   container: {
@@ -17,23 +15,20 @@ const styles = theme => ({
     marginRight: 4
   },
   right: {
-    color: blue[400]
+    color: '#1DE9B6'
   },
   wrong: {
-    color: red[600]
+    color: '#DD2C00'
   }
 })
 
-const RowHints = ({classes, hints, marked}) => {
-  console.log(marked, hints, marked === hints)
-  return (
-    <div className={`${classes.container} ${classes[marked.equals(hints) ? 'right' : 'wrong']}`}>
-      {hints.map(hint =>
-        <span className={classes.rowHint}>{hint}</span>
-      )}
-    </div>
-  )
-}
+const RowHints = ({classes, hints, marked}) => (
+  <div className={`${classes.container} ${classes[marked.equals(hints) ? 'right' : 'wrong']}`}>
+    {hints.map(hint =>
+      <span className={classes.rowHint}>{hint}</span>
+    )}
+  </div>
+)
 
 const mapStateToProps = ({nonogram, rowsHints}, {rowIndex}) => ({
   hints: rowsHints[rowIndex],

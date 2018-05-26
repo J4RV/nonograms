@@ -1,7 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import { withStyles } from '@material-ui/core/styles'
-import grey from '@material-ui/core/colors/grey'
+import withStyles from 'react-jss'
 import toggleSquare from '../actions/toggleSquare'
 
 const styles = theme => ({
@@ -13,21 +12,21 @@ const styles = theme => ({
     position: 'relative'
   },
   true: {
-    background: grey[800],
-    boxShadow: theme.shadows[1],
-    zIndex: 1,
+    background: theme.grey[800],
+    boxShadow: theme.shadows[0],
+    zIndex: 0,
     '&:hover': {
-      boxShadow: theme.shadows[3],
-      zIndex: 3
+      boxShadow: theme.shadows[1],
+      zIndex: 1
     }
   },
   false: {
-    background: grey[200],
-    boxShadow: theme.shadows[4],
-    zIndex: 4,
+    background: theme.grey[50],
+    boxShadow: theme.shadows[1],
+    zIndex: 2,
     '&:hover': {
-      boxShadow: theme.shadows[6],
-      zIndex: 6
+      boxShadow: theme.shadows[2],
+      zIndex: 3
     }
   }
 })
