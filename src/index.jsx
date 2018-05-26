@@ -5,6 +5,8 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import App from './components/App'
 import store from './store'
 
+require('./prototypes/arrayEquals')
+
 ReactDOM.render(
   <Provider store={store}>
     <React.Fragment>

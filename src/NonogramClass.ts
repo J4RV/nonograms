@@ -3,29 +3,38 @@ class Nonogram {
   height: number
   matrix: boolean[][] // [row][column]
 
-  constructor (width:number, height:number) {
+  constructor (width:number, height:number, matrix: boolean[][]) {
     this.width = width
     this.height = height
-    this.matrix = []
-    // init matrix
-    for(let r:number = 0; r < width; r++) {
-      this.matrix[r] = []
-      for(let c:number = 0; c < height; c++) {
-          this.matrix[r][c] = false
+    if (matrix) {this.matrix = matrix}
+    else {
+      this.matrix = []
+      for(let r:number = 0; r < width; r++) {
+        this.matrix[r] = []
+        for(let c:number = 0; c < height; c++) {
+            this.matrix[r][c] = false
+        }
       }
     }
   }
 
-  toggle (column:number, row:number) {
-    this.matrix[row][column] = !this.matrix[row][column]
+  toggle (row:number, column:number) {
+    const newMatrix = this.matrix.slice()
+    newMatrix[row] = this.matrix[row].slice()
+    newMatrix[row][column] = !newMatrix[row][column]
+    return new Nonogram(this.width, this.height, newMatrix)
+  }
+
+  get (row:number, column:number) {
+    return this.matrix[row][column]
   }
 
   getMarkedRow (index:number) {
-    return this._calculateFromArray(this._getColumn(index))
+    return this._calculateFromArray(this._getRow(index))
   }
 
   getMarkedColumn (index:number) {
-    return this._calculateFromArray(this._getRow(index))
+    return this._calculateFromArray(this._getColumn(index))
   }
 
   _getRow (index:number) {

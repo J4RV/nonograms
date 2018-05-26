@@ -1,12 +1,16 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import Typography from '@material-ui/core/Typography'
+import Nonogram from './Nonogram'
 
-const App = ({name}) => {
+const App = ({nonogram}) => {
   return (
-    <Typography variant='title'>
-      {name}
-    </Typography>
+    <div>
+      <Typography variant='title'>
+        NONOGRAMS!
+      </Typography>
+      <Nonogram />
+    </div>
   )
 }
 
