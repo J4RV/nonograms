@@ -1,7 +1,7 @@
 class Nonogram {
-  width:number
+  width: number
   height: number
-  matrix: boolean[][] // [row][column]
+  matrix: boolean[/*row*/][/*column*/]
 
   constructor (height:number, width:number, matrix: boolean[][]) {
     this.width = width
@@ -45,7 +45,7 @@ class Nonogram {
     return this.matrix.map(row => row[index])
   }
 
-  _calculateFromArray (squares:boolean[]) { 
+  _calculateFromArray (squares:boolean[]) {
     let res:number[] = []
     let acum:number = 0
     squares.forEach(square => {

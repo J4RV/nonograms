@@ -4,12 +4,13 @@ import { Link } from 'react-router-dom'
 import withStyles from 'react-jss'
 import Nonogram from './Nonogram'
 import loadLevel from '../actions/loadLevel'
+import {LEVEL_NAMES} from '../nonograms/all'
 import levels from '../nonograms/all'
 
 const styles = theme => ({
   nextButton: {
-    padding: theme.separation * 2,
-    margin: [0, 'auto'],
+    padding: '0.5rem',
+    margin: ['1rem', 'auto'],
 
     color: 'white',
     backgroundColor: theme.palette.primary,
@@ -53,16 +54,20 @@ const NextLevelButton = ({level, sublevel, loadLevel, classes}) => {
 
   const {nextLevel, nextSublevel} = getNextLevelIndexes(level, sublevel)
   return (
-    <div className={classes.nextButton} onClick={() => console.log(levels[level].length) || loadLevel(nextLevel, nextSublevel)}>    
-      <Link
-        to={`/level/${nextLevel}/sublevel/${nextSublevel}`}
-        onClick={() => console.log(levels[level].length) || loadLevel(nextLevel, nextSublevel)}
-      >
+    <Link
+      to={`/level/${nextLevel}/sublevel/${nextSublevel}`}
+      onClick={() => console.log(levels[level].length) || loadLevel(nextLevel, nextSublevel)}
+    >
+      <div className={classes.nextButton}>
         Next
-      </Link>
-    </div>
+      </div>
+    </Link>
   )
 }
+
+const LevelName = ({level, sublevel}) => (
+  <h2>{`${LEVEL_NAMES[level]} - ${parseInt(sublevel, 10) + 1}`}</h2>
+)
 
 class NonogramLevel extends React.Component {
   componentWillMount () {
@@ -77,6 +82,7 @@ class NonogramLevel extends React.Component {
     const {match, loadLevel, classes} = this.props
     const {level, sublevel} = match.params
     return <React.Fragment>
+      <LevelName level={level} sublevel={sublevel} />
       <Nonogram />
       <NextLevelButton level={level} sublevel={sublevel} loadLevel={loadLevel} classes={classes} />
     </React.Fragment>

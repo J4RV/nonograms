@@ -13,12 +13,12 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'static/bundle.js',
-    publicPath: '/nonograms/'
+    publicPath: '/nonograms'
   },
 
   devtool: 'source-map',
   devServer: {
-    historyApiFallback: true
+    historyApiFallback: { index: '/nonograms' }
   },
 
   module: {

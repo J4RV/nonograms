@@ -1,4 +1,13 @@
-const SHADOW_COLOUR = '#26323855'
+const GREY = {
+  0: '#FFFFFF',
+  50: '#ECEFF1',
+  100: '#CFD8DC',
+  400: '#78909C',
+  700: '#455A64',
+  800: '#37474F',
+  900: '#263238'
+}
+const SHADOW_COLOUR = GREY[900] + '55'
 const SQUARE_SIZE = 32
 const HINTS_LENGTH = SQUARE_SIZE
 const SHADOWS = [
@@ -10,18 +19,15 @@ const SHADOWS = [
 ]
 
 const theme = {
-  separation: 4,
+  separation: 1,
   squareSize: SQUARE_SIZE,
   hintsLength: HINTS_LENGTH,
   hintTextSize: 20,
+
   shadows: SHADOWS,
   insetShadows: SHADOWS.map(shadow => shadow.map(s => s + ' inset')),
-  grey: {
-    50: '#ECEFF1',
-    100: '#CFD8DC',
-    400: '#78909C',
-    800: '#37474F'
-  },
+
+  grey: GREY,
   palette: {
     primary: '#1DE9B6',
     secondary: '#DD2C00'
