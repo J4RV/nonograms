@@ -1,14 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import withStyles from 'react-jss'
-
-const styles = theme => ({
-  container: {
-    margin: 8,
-    padding: 8,
-    textAlign: 'left'
-  }
-})
+import Nonogram from './Nonogram'
+import emptyLevel from '../actions/emptyLevel'
 
 const getColumnsHints = (nonogram) => {
   const hints = []
@@ -29,16 +22,25 @@ const getRowsHints = (nonogram) => {
 const getStateFromNonogram = (nonogram) => (
   `{
   rowsHints: ${JSON.stringify(getRowsHints(nonogram))},
-  columnsHints: ${JSON.stringify(getColumnsHints(nonogram))},
-  nonogram: new Nonogram(${nonogram.height}, ${nonogram.width})
+  columnsHints: ${JSON.stringify(getColumnsHints(nonogram))}
 }`
 )
 
-const Component = ({classes, nonogram}) => {
-  console.log(getStateFromNonogram(nonogram))
-  return null
+class Editor extends React.Component {
+  // Change state from URL params
+  componentWillMount () {
+    const {match, emptyLevel} = this.props
+    const {height, width} = match.params
+    emptyLevel(height, width)
+  }
+
+  render () {
+    console.log(getStateFromNonogram(this.props.nonogram))
+    return <Nonogram editor />
+  }
 }
 
 export default connect(
-  state => ({nonogram: state.nonogram})
-)(withStyles(styles)(Component))
+  state => state,
+  {emptyLevel}
+)(Editor)

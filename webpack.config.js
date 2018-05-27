@@ -42,7 +42,7 @@ module.exports = {
     new CleanWebpackPlugin(['dist']),
     new CopyWebpackPlugin(['/public/*.css'], {}),
     new HtmlWebpackPlugin({
-      title: 'Template',
+      title: 'J4RV Nonograms',
       template: 'public/index.html'
     })
   ]

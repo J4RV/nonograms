@@ -1,4 +1,4 @@
 import tutorial from './tutorial'
-import heart from './heart'
+import easy from './easy'
 
-export default [tutorial, heart]
+export default [tutorial, easy]

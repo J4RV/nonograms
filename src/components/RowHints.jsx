@@ -28,9 +28,12 @@ const styles = theme => ({
 
 const RowHints = ({classes, hints, marked}) => (
   <div className={`${classes.rowHints} ${classes[marked.equals(hints) ? 'right' : 'wrong']}`}>
-    {hints.map(hint =>
-      <span className={classes.rowHint}>{hint}</span>
-    )}
+    {
+      hints && hints.length > 0
+        ? hints.map(hint =>
+          <span className={classes.rowHint}>{hint}</span>)
+        : 0
+    }
   </div>
 )
 

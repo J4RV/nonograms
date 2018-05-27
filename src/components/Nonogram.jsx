@@ -18,19 +18,19 @@ const styles = theme => ({
   }
 })
 
-const NonogramRow = ({classes, squares, rowIndex}) => (
+const NonogramRow = ({classes, squares, editor, rowIndex}) => (
   <div className={classes.row}>
-    <RowHints rowIndex={rowIndex} />
+    {editor ? null : <RowHints rowIndex={rowIndex} />}
     {squares.map((square, squareIndex) => <Square row={rowIndex} column={squareIndex} />)}
   </div>
 )
 
-const Nonogram = ({classes, nonogram, toggleSquare}) => {
+const Nonogram = ({classes, nonogram, editor, toggleSquare}) => {
   return (
     <div className={classes.container}>
-      <ColumnsHints />
+      {editor ? null : <ColumnsHints />}
       {nonogram.matrix.map((row, rowIndex) => (
-        <NonogramRow rowIndex={rowIndex} squares={row} classes={classes} />
+        <NonogramRow rowIndex={rowIndex} squares={row} classes={classes} editor={editor} />
       ))}
     </div>
   )

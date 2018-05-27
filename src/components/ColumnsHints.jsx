@@ -31,13 +31,18 @@ const styles = theme => ({
 
 const ColumnHints = ({classes, hints, marked}) => (
   <div className={`${classes.columnHints} ${classes[marked.equals(hints) ? 'right' : 'wrong']}`}>
-    {hints.map(hint =>
-      <span className={classes.columnHint}>{hint}</span>
-    )}
+    {
+      hints && hints.length > 0
+        ? hints.map(hint =>
+          <span className={classes.columnHint}>{hint}</span>)
+        : 0
+    }
   </div>
 )
 
 const ColumnsHints = ({classes, columnsHints, nonogram}) => {
+  console.log(columnsHints)
+  console.log(nonogram)
   return (
     <div className={classes.container}>
       <UpperLeftCorner />
@@ -52,8 +57,8 @@ const ColumnsHints = ({classes, columnsHints, nonogram}) => {
   )
 }
 
-const mapStateToProps = ({nonogram, columnsHints}) => ({
-  columnsHints, nonogram
+const mapStateToProps = (state) => ({
+  columnsHints: state.columnsHints, nonogram: state.nonogram
 })
 
 export default connect(mapStateToProps)(withStyles(styles)(ColumnsHints))
