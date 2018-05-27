@@ -8,18 +8,26 @@ import levels from '../nonograms/all'
 
 const styles = theme => ({
   nextButton: {
-    padding: theme.separation,
-    borderRadius: theme.separation,
+    padding: theme.separation * 2,
+    margin: [0, 'auto'],
+
     color: 'white',
     backgroundColor: theme.palette.primary,
-    maxWidth: '6rem',
-    margin: [0, 'auto'],
-    boxShadow: theme.shadows[1],
+
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    letterSpacing: 2,
+
+    width: '3rem',
+    borderRadius: '3rem',
+
+    boxShadow: theme.shadows[2],
     '&:hover': {
-      boxShadow: theme.shadows[2]
+      boxShadow: theme.shadows[3]
     },
     '&:active': {
-      boxShadow: theme.shadows[3]
+      boxShadow: theme.shadows[4]
     }
   }
 })
@@ -45,12 +53,12 @@ const NextLevelButton = ({level, sublevel, loadLevel, classes}) => {
 
   const {nextLevel, nextSublevel} = getNextLevelIndexes(level, sublevel)
   return (
-    <div className={classes.nextButton}>
+    <div className={classes.nextButton} onClick={() => console.log(levels[level].length) || loadLevel(nextLevel, nextSublevel)}>    
       <Link
         to={`/level/${nextLevel}/sublevel/${nextSublevel}`}
         onClick={() => console.log(levels[level].length) || loadLevel(nextLevel, nextSublevel)}
       >
-        NEXT!
+        Next
       </Link>
     </div>
   )

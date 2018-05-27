@@ -4,7 +4,7 @@ import withStyles from 'react-jss'
 import NonogramLevel from './NonogramLevel'
 import LevelSelect from './LevelSelect'
 import Editor from './Editor'
-import {Route} from 'react-router-dom'
+import {Route, Link} from 'react-router-dom'
 
 const styles = theme => ({
   app: {
@@ -20,8 +20,10 @@ const App = ({classes}) => {
   return (
     <div className={classes.app}>
       <div className={classes.header}>
-        <h1>NONOGRAMS!</h1>
-        <h3><a href='https://wikipedia.org/wiki/Nonogram'>What's a Nonogram?</a></h3>
+        <h1><Link to='/'>Nonograms~</Link></h1>
+        <Route exact path='/' render={() => (
+          <h3><a href='https://wikipedia.org/wiki/Nonogram'>What's a Nonogram?</a></h3>
+        )} />
       </div>
       <Route exact path='/' component={LevelSelect} />
       <Route path='/level/:level/sublevel/:sublevel' component={NonogramLevel} />
