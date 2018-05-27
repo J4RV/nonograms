@@ -1,0 +1,24 @@
+/* Global css */
+
+*{
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-size: 32px
+}
+
+h1 {
+  margin: 1rem 0;
+  font-size: 3rem;
+}
+
+h3 {
+  margin: 0.25rem 0;
+  font-size: 1.5rem;
+}
+
+a {
+  color: inherit;
+} 

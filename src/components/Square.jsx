@@ -5,10 +5,10 @@ import toggleSquare from '../actions/toggleSquare'
 
 const styles = theme => ({
   square: {
-    margin: 2,
-    width: 24,
-    height: 24,
-    borderRadius: 3,
+    margin: theme.separation,
+    width: theme.squareSize,
+    height: theme.squareSize,
+    borderRadius: theme.units,
     position: 'relative'
   },
   true: {
@@ -35,7 +35,7 @@ const Square = ({classes, row, column, ticked, toggleSquare}) => {
   return (
     <div
       className={`${classes.square} ${classes[ticked]}`}
-      onClick={() => toggleSquare(row, column)}
+      onClick={(e) => toggleSquare(row, column)}
     />
   )
 }

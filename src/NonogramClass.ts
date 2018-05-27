@@ -3,15 +3,15 @@ class Nonogram {
   height: number
   matrix: boolean[][] // [row][column]
 
-  constructor (width:number, height:number, matrix: boolean[][]) {
+  constructor (height:number, width:number, matrix: boolean[][]) {
     this.width = width
     this.height = height
     if (matrix) {this.matrix = matrix}
     else {
       this.matrix = []
-      for(let r:number = 0; r < width; r++) {
+      for(let r:number = 0; r < height; r++) {
         this.matrix[r] = []
-        for(let c:number = 0; c < height; c++) {
+        for(let c:number = 0; c < width; c++) {
             this.matrix[r][c] = false
         }
       }
@@ -22,7 +22,7 @@ class Nonogram {
     const newMatrix = this.matrix.slice()
     newMatrix[row] = this.matrix[row].slice()
     newMatrix[row][column] = !newMatrix[row][column]
-    return new Nonogram(this.width, this.height, newMatrix)
+    return new Nonogram(this.height, this.width, newMatrix)
   }
 
   get (row:number, column:number) {

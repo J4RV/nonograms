@@ -3,16 +3,20 @@ import {connect} from 'react-redux'
 import withStyles from 'react-jss'
 
 const styles = theme => ({
-  container: {
-    margin: 2,
-    width: 24 * 3,
-    height: 24,
+  rowHints: {
+    padding: theme.separation,
+    display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    width: theme.hintsLength,
+    height: theme.squareSize,
     textAlign: 'right',
-    letterSpacing: -1,
+    fontSize: theme.hintTextSize,
+    letterSpacing: -theme.separation,
     fontFamily: ['Ubuntu Mono', 'monospace']
   },
   rowHint: {
-    marginRight: 4
+    marginLeft: '1rem'
   },
   right: {
     color: '#1DE9B6'
@@ -23,7 +27,7 @@ const styles = theme => ({
 })
 
 const RowHints = ({classes, hints, marked}) => (
-  <div className={`${classes.container} ${classes[marked.equals(hints) ? 'right' : 'wrong']}`}>
+  <div className={`${classes.rowHints} ${classes[marked.equals(hints) ? 'right' : 'wrong']}`}>
     {hints.map(hint =>
       <span className={classes.rowHint}>{hint}</span>
     )}

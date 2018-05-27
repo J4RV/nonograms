@@ -6,9 +6,9 @@ import withStyles from 'react-jss'
 
 const styles = theme => ({
   upperLeftCorner: {
-    margin: 2,
-    width: 24 * 3,
-    height: 24 * 3
+    margin: theme.separation,
+    width: theme.hintsLength,
+    height: theme.hintsLength
   }
 })
 

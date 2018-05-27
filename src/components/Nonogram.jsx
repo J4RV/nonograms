@@ -7,8 +7,8 @@ import Square from './Square'
 
 const styles = theme => ({
   container: {
-    margin: 8,
-    padding: 8,
+    margin: theme.separation * 4,
+    padding: theme.separation * 2,
     display: 'inline-flex',
     flexDirection: 'column'
   },

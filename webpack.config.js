@@ -1,5 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const isDev = process.env.WEBPACK_SERVE === true
 
@@ -9,13 +11,14 @@ module.exports = {
   entry: './src/index.jsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: '/'
   },
 
   devtool: 'source-map',
-  performance: { hints: false },
-
-  watch: isDev,
+  devServer: {
+    historyApiFallback: true
+  },
 
   module: {
     rules: [
@@ -23,6 +26,10 @@ module.exports = {
         test: /\.(tsx?|jsx)$/,
         use: 'ts-loader',
         exclude: /node_modules/
+      },
+      {
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader' ]
       }
     ]
   },
@@ -32,6 +39,8 @@ module.exports = {
   },
 
   plugins: [
+    new CleanWebpackPlugin(['dist']),
+    new CopyWebpackPlugin(['/public/*.css'], {}),
     new HtmlWebpackPlugin({
       title: 'Template',
       template: 'public/index.html'

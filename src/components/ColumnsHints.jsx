@@ -6,12 +6,13 @@ import UpperLeftCorner from './UpperLeftCorner'
 const styles = theme => ({
   container: {
     display: 'flex',
-    textAlign: 'center'
+    textAlign: 'center',
+    fontSize: theme.hintTextSize
   },
   columnHints: {
-    margin: 2,
-    width: 24,
-    height: 24 * 3,
+    padding: theme.separation,
+    width: theme.squareSize,
+    height: theme.hintsLength,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-end',
@@ -19,7 +20,6 @@ const styles = theme => ({
     fontFamily: ['Ubuntu Mono', 'monospace']
   },
   columnHint: {
-    marginBottom: 4
   },
   right: {
     color: '#1DE9B6'
