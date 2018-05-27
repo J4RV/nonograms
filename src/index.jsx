@@ -19,7 +19,7 @@ if ('addEventListener' in document) {
 
 const NonogramApp = () => (
   <Provider store={store}>
-    <Router>
+    <Router basename='/nonograms'>
       <Route path='*' exact component={App} />
     </Router>
   </Provider>

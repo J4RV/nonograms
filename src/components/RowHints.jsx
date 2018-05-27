@@ -8,7 +8,7 @@ const styles = theme => ({
     display: 'flex',
     justifyContent: 'flex-end',
     alignItems: 'center',
-    width: theme.hintsLength,
+    flexGrow: 1,
     height: theme.squareSize,
     textAlign: 'right',
     fontSize: theme.hintTextSize,
@@ -16,13 +16,13 @@ const styles = theme => ({
     fontFamily: ['Ubuntu Mono', 'monospace']
   },
   rowHint: {
-    marginLeft: '1rem'
+    margin: [0, '0.25rem']
   },
   right: {
-    color: '#1DE9B6'
+    color: theme.palette.primary
   },
   wrong: {
-    color: '#DD2C00'
+    color: theme.palette.secondary
   }
 })
 

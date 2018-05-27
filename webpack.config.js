@@ -2,6 +2,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 const isDev = process.env.WEBPACK_SERVE === true
 
@@ -11,8 +12,8 @@ module.exports = {
   entry: './src/index.jsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
-    publicPath: '/'
+    filename: 'static/bundle.js',
+    publicPath: '/nonograms/'
   },
 
   devtool: 'source-map',
@@ -29,7 +30,10 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [ 'style-loader', 'css-loader' ]
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: 'css-loader'
+        })
       }
     ]
   },
@@ -40,6 +44,7 @@ module.exports = {
 
   plugins: [
     new CleanWebpackPlugin(['dist']),
+    new ExtractTextPlugin('static/styles.css'),
     new CopyWebpackPlugin(['/public/*.css'], {}),
     new HtmlWebpackPlugin({
       title: 'J4RV Nonograms',

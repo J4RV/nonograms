@@ -8,15 +8,15 @@ const styles = theme => ({
     margin: theme.separation,
     width: theme.squareSize,
     height: theme.squareSize,
-    borderRadius: theme.units,
+    borderRadius: theme.separation,
     position: 'relative'
   },
   true: {
     background: theme.grey[800],
-    boxShadow: theme.shadows[0],
+    boxShadow: theme.insetShadows[1],
     zIndex: 0,
     '&:hover': {
-      boxShadow: theme.shadows[1],
+      boxShadow: theme.insetShadows[2],
       zIndex: 1
     }
   },

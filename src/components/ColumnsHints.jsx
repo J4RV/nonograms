@@ -12,7 +12,6 @@ const styles = theme => ({
   columnHints: {
     padding: theme.separation,
     width: theme.squareSize,
-    height: theme.hintsLength,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-end',
@@ -22,10 +21,10 @@ const styles = theme => ({
   columnHint: {
   },
   right: {
-    color: '#1DE9B6'
+    color: theme.palette.primary
   },
   wrong: {
-    color: '#DD2C00'
+    color: theme.palette.secondary
   }
 })
 

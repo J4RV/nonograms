@@ -1,9 +1,28 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import { Link } from 'react-router-dom'
+import withStyles from 'react-jss'
 import Nonogram from './Nonogram'
 import loadLevel from '../actions/loadLevel'
 import levels from '../nonograms/all'
+
+const styles = theme => ({
+  nextButton: {
+    padding: theme.separation,
+    borderRadius: theme.separation,
+    color: 'white',
+    backgroundColor: theme.palette.primary,
+    maxWidth: '6rem',
+    margin: [0, 'auto'],
+    boxShadow: theme.shadows[1],
+    '&:hover': {
+      boxShadow: theme.shadows[2]
+    },
+    '&:active': {
+      boxShadow: theme.shadows[3]
+    }
+  }
+})
 
 const getNextLevelIndexes = (level, sublevel) => {
   level = parseInt(level, 10)
@@ -20,17 +39,21 @@ const getNextLevelIndexes = (level, sublevel) => {
   }
 }
 
-const NextLevelButton = ({level, sublevel, loadLevel}) => {
+const NextLevelButton = ({level, sublevel, loadLevel, classes}) => {
   const nextLevelIndexes = getNextLevelIndexes(level, sublevel)
   if (nextLevelIndexes == null) return <h3>No more levels!</h3>
 
   const {nextLevel, nextSublevel} = getNextLevelIndexes(level, sublevel)
-  return <Link
-    to={`/level/${nextLevel}/sublevel/${nextSublevel}`}
-    onClick={() => console.log(levels[level].length) || loadLevel(nextLevel, nextSublevel)}
-  >
-    NEXT!
-  </Link>
+  return (
+    <div className={classes.nextButton}>
+      <Link
+        to={`/level/${nextLevel}/sublevel/${nextSublevel}`}
+        onClick={() => console.log(levels[level].length) || loadLevel(nextLevel, nextSublevel)}
+      >
+        NEXT!
+      </Link>
+    </div>
+  )
 }
 
 class NonogramLevel extends React.Component {
@@ -43,11 +66,11 @@ class NonogramLevel extends React.Component {
   }
 
   render () {
-    const {match, loadLevel} = this.props
+    const {match, loadLevel, classes} = this.props
     const {level, sublevel} = match.params
     return <React.Fragment>
       <Nonogram />
-      <NextLevelButton level={level} sublevel={sublevel} loadLevel={loadLevel} />
+      <NextLevelButton level={level} sublevel={sublevel} loadLevel={loadLevel} classes={classes} />
     </React.Fragment>
   }
 }
@@ -55,4 +78,4 @@ class NonogramLevel extends React.Component {
 export default connect(
   state => state,
   {loadLevel}
-)(NonogramLevel)
+)(withStyles(styles)(NonogramLevel))

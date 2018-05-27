@@ -7,8 +7,7 @@ import withStyles from 'react-jss'
 const styles = theme => ({
   upperLeftCorner: {
     margin: theme.separation,
-    width: theme.hintsLength,
-    height: theme.hintsLength
+    flexGrow: 1
   }
 })
 
