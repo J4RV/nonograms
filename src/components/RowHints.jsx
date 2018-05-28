@@ -19,10 +19,10 @@ const styles = theme => ({
     margin: [0, '0.25rem']
   },
   right: {
-    color: theme.palette.primary
+    color: theme.palette.primary.main
   },
   wrong: {
-    color: theme.palette.secondary
+    color: theme.palette.secondary.main
   }
 })
 

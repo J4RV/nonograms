@@ -2,34 +2,20 @@ import React from 'react'
 import {connect} from 'react-redux'
 import { Link } from 'react-router-dom'
 import withStyles from 'react-jss'
+import Button from '@material-ui/core/Button'
+import ConfirmationButton from './subcomponents/ConfirmationButton'
 import Nonogram from './Nonogram'
 import loadLevel from '../actions/loadLevel'
-import {LEVEL_NAMES} from '../nonograms/all'
-import levels from '../nonograms/all'
+import clear from '../actions/clearNonogram'
+import levels, {LEVEL_NAMES} from '../nonograms/all'
 
 const styles = theme => ({
-  nextButton: {
-    padding: '0.5rem',
-    margin: ['1rem', 'auto'],
-
-    color: 'white',
-    backgroundColor: theme.palette.primary,
-
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    letterSpacing: 2,
-
-    width: '3rem',
-    borderRadius: '3rem',
-
-    boxShadow: theme.shadows[2],
-    '&:hover': {
-      boxShadow: theme.shadows[3]
-    },
-    '&:active': {
-      boxShadow: theme.shadows[4]
-    }
+  container: {
+    margin: ['1rem', 'auto']
+  },
+  button: {
+    display: 'inline',
+    margin: theme.spacing.unit
   }
 })
 
@@ -48,20 +34,35 @@ const getNextLevelIndexes = (level, sublevel) => {
   }
 }
 
-const NextLevelButton = ({level, sublevel, loadLevel, classes}) => {
+const Buttons = ({level, sublevel, loadLevel, clear, classes}) => {
   const nextLevelIndexes = getNextLevelIndexes(level, sublevel)
   if (nextLevelIndexes == null) return <h3>No more levels!</h3>
 
   const {nextLevel, nextSublevel} = getNextLevelIndexes(level, sublevel)
   return (
-    <Link
-      to={`/level/${nextLevel}/sublevel/${nextSublevel}`}
-      onClick={() => console.log(levels[level].length) || loadLevel(nextLevel, nextSublevel)}
-    >
-      <div className={classes.nextButton}>
-        Next
-      </div>
-    </Link>
+    <div>
+      <ConfirmationButton
+        className={classes.button}
+        label='Clear'
+        color='secondary'
+        title='Clear Nonogram'
+        onConfirm={clear}
+        variant='outlined'
+        message='Do you really want to start over?'
+      />
+      <Link
+        to={`/level/${nextLevel}/sublevel/${nextSublevel}`}
+        onClick={() => loadLevel(nextLevel, nextSublevel)}
+      >
+        <Button 
+          className={classes.button} 
+          color='primary' 
+          variant='raised'
+        >
+          Next
+        </Button>
+      </Link>
+    </div>
   )
 }
 
@@ -78,18 +79,29 @@ class NonogramLevel extends React.Component {
     loadLevel(level, sublevel)
   }
 
+  componentWillReceiveProps (nextProps) {
+    // Update the puzzle if the URL level params changed
+    const {level, sublevel} = this.props.match.params
+    const newLevel = nextProps.match.params.level
+    const newSublevel = nextProps.match.params.sublevel
+    if (level !== newLevel || sublevel !== newSublevel) {
+      const {loadLevel} = this.props
+      loadLevel(newLevel, newSublevel)
+    }
+  }
+
   render () {
-    const {match, loadLevel, classes} = this.props
+    const {match, loadLevel, clear, classes} = this.props
     const {level, sublevel} = match.params
-    return <React.Fragment>
+    return <div className={classes.container}>
       <LevelName level={level} sublevel={sublevel} />
       <Nonogram />
-      <NextLevelButton level={level} sublevel={sublevel} loadLevel={loadLevel} classes={classes} />
-    </React.Fragment>
+      <Buttons level={level} sublevel={sublevel} loadLevel={loadLevel} clear={clear} classes={classes} />
+    </div>
   }
 }
 
 export default connect(
   state => state,
-  {loadLevel}
+  {loadLevel, clear}
 )(withStyles(styles)(NonogramLevel))

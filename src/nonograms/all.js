@@ -1,5 +1,7 @@
 import tutorial from './tutorial'
 import easy from './easy'
+import normal from './normal'
+import hard from './hard'
 
 export const LEVEL_NAMES = {
   0: 'Tutorial',
@@ -8,4 +10,4 @@ export const LEVEL_NAMES = {
   3: 'Hard'
 }
 
-export default [tutorial, easy]
+export default [tutorial, easy, normal, hard]

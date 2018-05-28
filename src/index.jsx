@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom'
 import {Provider} from 'react-redux'
 import {ThemeProvider} from 'react-jss'
 import FastClick from 'fastclick'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import { MuiThemeProvider } from '@material-ui/core/styles'
 import App from './components/App'
 import store from './store'
 import theme from './theme'
@@ -20,7 +22,10 @@ if ('addEventListener' in document) {
 const NonogramApp = () => (
   <Provider store={store}>
     <Router basename='/nonograms'>
-      <Route path='*' exact component={App} />
+      <MuiThemeProvider theme={theme}>
+        <CssBaseline />
+        <Route path='*' exact component={App} />
+      </MuiThemeProvider>
     </Router>
   </Provider>
 )

@@ -10,7 +10,7 @@ const styles = theme => ({
     fontSize: theme.hintTextSize
   },
   columnHints: {
-    padding: theme.separation,
+    margin: theme.separation,
     width: theme.squareSize,
     display: 'flex',
     flexDirection: 'column',
@@ -21,10 +21,10 @@ const styles = theme => ({
   columnHint: {
   },
   right: {
-    color: theme.palette.primary
+    color: theme.palette.primary.main
   },
   wrong: {
-    color: theme.palette.secondary
+    color: theme.palette.secondary.main
   }
 })
 
@@ -40,8 +40,6 @@ const ColumnHints = ({classes, hints, marked}) => (
 )
 
 const ColumnsHints = ({classes, columnsHints, nonogram}) => {
-  console.log(columnsHints)
-  console.log(nonogram)
   return (
     <div className={classes.container}>
       <UpperLeftCorner />

@@ -19,7 +19,7 @@ const styles = theme => ({
   false: {
     background: theme.grey[50],
     position: 'relative',
-    boxShadow: theme.shadows[0],
+    boxShadow: theme.shadows[1],
     '&:hover': {
       background: theme.grey[0]
     }

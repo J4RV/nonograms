@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@material-ui/core": "^1.1.0",
     "clean-webpack-plugin": "^0.1.19",
     "fastclick": "^1.0.6",
     "react": "^16.4.0",

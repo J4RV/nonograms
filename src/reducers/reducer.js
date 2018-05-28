@@ -2,6 +2,7 @@ import Nonogram from '../NonogramClass'
 import {TOGGLE_SQUARE} from '../actions/toggleSquare'
 import {LOAD_LEVEL} from '../actions/loadLevel'
 import {EMPTY_LEVEL} from '../actions/emptyLevel'
+import {CLEAR_NONOGRAM} from '../actions/clearNonogram'
 import levels from '../nonograms/all'
 
 const emptyNonogram = (width, height) => ({
@@ -21,22 +22,25 @@ const initState = {...emptyNonogram(0, 0)}
 export default (state = initState, action) => {
   switch (action.type) {
     case TOGGLE_SQUARE:
-      const {row, column} = action.payload
+      let {row, column} = action.payload
       return {...state, nonogram: state.nonogram.toggle(row, column)}
 
     case LOAD_LEVEL:
-      const {level, sublevel} = action.payload
+      let {level, sublevel} = action.payload
       return {
         ...state,
         ...loadNonogram(levels[level][sublevel])
       }
 
     case EMPTY_LEVEL:
-      const {height, width} = action.payload
+      let {height, width} = action.payload
       return {
         ...state,
         ...emptyNonogram(height, width)
       }
+
+    case CLEAR_NONOGRAM:
+      return {...state, nonogram: new Nonogram(state.nonogram.height, state.nonogram.width)}
 
     default:
       return state
