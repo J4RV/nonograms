@@ -45,10 +45,13 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new ExtractTextPlugin('static/styles.css'),
-    new CopyWebpackPlugin(['/public/*.css'], {}),
     new HtmlWebpackPlugin({
       title: 'J4RV Nonograms',
       template: 'public/index.html'
-    })
+    }),
+    new CopyWebpackPlugin([
+      {from: 'public/static/*.css', to: 'static/[name].css'},
+      {from: 'public/404.html'}
+    ])
   ]
 }
