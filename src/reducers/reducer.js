@@ -4,6 +4,7 @@ import {LOAD_LEVEL} from '../actions/loadLevel'
 import {EMPTY_LEVEL} from '../actions/emptyLevel'
 import {CLEAR_NONOGRAM} from '../actions/clearNonogram'
 import {SET_MOUSE_DOWN} from '../actions/setMouseDown'
+import {INVERT} from '../actions/invert'
 import levels from '../nonograms/all'
 
 const emptyNonogram = (width, height) => ({
@@ -28,6 +29,12 @@ export default (state = initState, action) => {
         ...state,
         lastClickSquareValue: state.nonogram.get(row, column),
         nonogram: state.nonogram.toggle(row, column)
+      }
+
+    case INVERT:
+      return {
+        ...state,
+        nonogram: state.nonogram.invert()
       }
 
     case LOAD_LEVEL:

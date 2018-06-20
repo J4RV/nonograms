@@ -5,12 +5,14 @@ import toggleSquare from '../actions/toggleSquare'
 import setMouseDown from '../actions/setMouseDown'
 
 const styles = theme => ({
+  container: {
+    padding: theme.separation,
+    userSelect: 'none'
+  },
   square: {
-    margin: theme.separation,
     width: theme.squareSize,
     height: theme.squareSize,
-    borderRadius: 3,
-    userSelect: 'none'
+    borderRadius: 3
   },
   true: {
     background: theme.grey[800],
@@ -30,18 +32,21 @@ const styles = theme => ({
 
 const Square = ({classes, row, column, ticked, mouseIsDown, lastClickSquareValue, toggleSquare, setMouseDown}) => {
   const handleOnHover = () => {
-    console.log(mouseIsDown)
     if (mouseIsDown && ticked === lastClickSquareValue) {
       toggleSquare(row, column)
     }
   }
   return (
     <div
-      className={`${classes.square} ${classes[ticked]}`}
+      className={classes.container}
       onMouseOver={() => handleOnHover()}
       onMouseDown={() => { setMouseDown(true); toggleSquare(row, column) }}
       onMouseUp={() => setMouseDown(false)}
-    />
+    >
+      <div
+        className={`${classes.square} ${classes[ticked]}`}
+      />
+    </div>
   )
 }
 

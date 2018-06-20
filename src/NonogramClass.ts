@@ -29,6 +29,11 @@ class Nonogram {
     return this.matrix[row][column]
   }
 
+  invert () {
+    const invertedMatrix = this.matrix.map(row => (row.map(value => !value)))
+    return new Nonogram(this.height, this.width, invertedMatrix)
+  }
+
   getMarkedRow (index:number) {
     return this._calculateFromArray(this._getRow(index))
   }

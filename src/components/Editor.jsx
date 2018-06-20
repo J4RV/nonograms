@@ -1,7 +1,15 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import Nonogram from './Nonogram'
+import Button from '@material-ui/core/Button'
 import emptyLevel from '../actions/emptyLevel'
+import invert from '../actions/invert'
+
+const styles = theme => ({
+  button: {
+    display: 'block'
+  }
+})
 
 const getColumnsHints = (nonogram) => {
   const hints = []
@@ -36,11 +44,20 @@ class Editor extends React.Component {
 
   render () {
     console.log(getStateFromNonogram(this.props.nonogram))
-    return <Nonogram editor />
+    return <React.Fragment>
+      <Nonogram editor />
+      <Button
+        color='primary'
+        variant='raised'
+        onClick={this.props.invert}
+      >
+        Invert
+      </Button>
+    </React.Fragment>
   }
 }
 
 export default connect(
   state => state,
-  {emptyLevel}
+  {emptyLevel, invert}
 )(Editor)

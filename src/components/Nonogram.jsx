@@ -26,11 +26,13 @@ const NonogramRow = ({classes, squares, editor, rowIndex}) => (
 
 const Nonogram = ({classes, nonogram, editor, toggleSquare}) => {
   return (
-    <div className={classes.container}>
-      {editor ? null : <ColumnsHints />}
-      {nonogram.matrix.map((row, rowIndex) => (
-        <NonogramRow rowIndex={rowIndex} squares={row} classes={classes} editor={editor} />
-      ))}
+    <div>
+      <div className={classes.container}>
+        {editor ? null : <ColumnsHints />}
+        {nonogram.matrix.map((row, rowIndex) => (
+          <NonogramRow rowIndex={rowIndex} squares={row} classes={classes} editor={editor} />
+        ))}
+      </div>
     </div>
   )
 }
