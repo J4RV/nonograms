@@ -4,12 +4,7 @@ import Nonogram from './Nonogram'
 import Button from '@material-ui/core/Button'
 import emptyLevel from '../actions/emptyLevel'
 import invert from '../actions/invert'
-
-const styles = theme => ({
-  button: {
-    display: 'block'
-  }
-})
+import clear from '../actions/clearNonogram'
 
 const getColumnsHints = (nonogram) => {
   const hints = []
@@ -53,11 +48,18 @@ class Editor extends React.Component {
       >
         Invert
       </Button>
+      <Button
+        color='secondary'
+        variant='raised'
+        onClick={this.props.clear}
+      >
+        Clear
+      </Button>
     </React.Fragment>
   }
 }
 
 export default connect(
   state => state,
-  {emptyLevel, invert}
+  {emptyLevel, invert, clear}
 )(Editor)
