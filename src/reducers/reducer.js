@@ -3,6 +3,7 @@ import {TOGGLE_SQUARE} from '../actions/toggleSquare'
 import {LOAD_LEVEL} from '../actions/loadLevel'
 import {EMPTY_LEVEL} from '../actions/emptyLevel'
 import {CLEAR_NONOGRAM} from '../actions/clearNonogram'
+import {SET_MOUSE_DOWN} from '../actions/setMouseDown'
 import levels from '../nonograms/all'
 
 const emptyNonogram = (width, height) => ({
@@ -17,13 +18,17 @@ const loadNonogram = ({rowsHints, columnsHints}) => ({
   nonogram: new Nonogram(rowsHints.length, columnsHints.length)
 })
 
-const initState = {...emptyNonogram(0, 0)}
+const initState = {...emptyNonogram(0, 0), lastClickSquareValue: true, mouseIsDown: false}
 
 export default (state = initState, action) => {
   switch (action.type) {
     case TOGGLE_SQUARE:
       let {row, column} = action.payload
-      return {...state, nonogram: state.nonogram.toggle(row, column)}
+      return {
+        ...state,
+        lastClickSquareValue: state.nonogram.get(row, column),
+        nonogram: state.nonogram.toggle(row, column)
+      }
 
     case LOAD_LEVEL:
       let {level, sublevel} = action.payload
@@ -41,6 +46,9 @@ export default (state = initState, action) => {
 
     case CLEAR_NONOGRAM:
       return {...state, nonogram: new Nonogram(state.nonogram.height, state.nonogram.width)}
+
+    case SET_MOUSE_DOWN:
+      return {...state, mouseIsDown: action.payload.mouseIsDown}
 
     default:
       return state
