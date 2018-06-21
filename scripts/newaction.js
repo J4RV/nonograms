@@ -1,8 +1,8 @@
 const files = require('fs')
 const path = require('path')
 
-if (process.argv.length === 0) {
-  throw new Error('Missing action name')
+if (process.argv.length === 2) {
+  throw new Error('Missing action name (expected to be in camelCase format)')
 }
 
 const PROJECT_FOLDER = path.dirname(__dirname)
