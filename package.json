@@ -13,7 +13,8 @@
   },
   "scripts": {
     "start": "webpack-dev-server --hot --inline",
-    "build": "webpack"
+    "build": "webpack",
+    "newaction": "node scripts/newaction.js"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^4.5.1",
