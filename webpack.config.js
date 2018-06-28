@@ -11,7 +11,7 @@ module.exports = {
 
   entry: './src/index.jsx',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'docs'),
     filename: 'static/bundle.js',
     publicPath: '/nonograms'
   },
