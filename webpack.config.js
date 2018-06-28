@@ -45,7 +45,7 @@ module.exports = {
   },
 
   plugins: [
-    new CleanWebpackPlugin(['dist']),
+    new CleanWebpackPlugin(['docs']),
     new ExtractTextPlugin('static/styles.css'),
     new HtmlWebpackPlugin({
       title: 'J4RV Nonograms',
