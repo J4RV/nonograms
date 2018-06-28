@@ -1,3 +1,5 @@
+import {arrayEquals} from './prototypes/arrayEquals'
+
 class Nonogram {
   width: number
   height: number
@@ -32,6 +34,26 @@ class Nonogram {
   invert () {
     const invertedMatrix = this.matrix.map(row => (row.map(value => !value)))
     return new Nonogram(this.height, this.width, invertedMatrix)
+  }
+
+  isCorrect (rowsHints:boolean[][], columnsHints:boolean[][]) {
+    // Check rows
+    for (let i = 0; i < rowsHints.length; i++) {
+      console.log(arrayEquals)
+      console.log(rowsHints[i])
+      console.log(this.getMarkedRow(i))
+      if (arrayEquals(rowsHints[i], this.getMarkedRow(i)) === false) {
+        return false
+      }
+    }
+    // Check columns
+    for (let i = 0; i < columnsHints.length; i++) {
+      if (arrayEquals(columnsHints[i], this.getMarkedColumn(i)) === false) {
+        return false
+      }
+    }
+    // All hints are correct
+    return true
   }
 
   getMarkedRow (index:number) {

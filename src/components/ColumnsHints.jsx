@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import withStyles from 'react-jss'
 import UpperLeftCorner from './UpperLeftCorner'
+import {arrayEquals} from '../prototypes/arrayEquals'
 
 const styles = theme => ({
   container: {
@@ -29,7 +30,7 @@ const styles = theme => ({
 })
 
 const ColumnHints = ({classes, hints, marked}) => (
-  <div className={`${classes.columnHints} ${classes[marked.equals(hints) ? 'right' : 'wrong']}`}>
+  <div className={`${classes.columnHints} ${classes[arrayEquals(marked, hints) ? 'right' : 'wrong']}`}>
     {
       hints && hints.length > 0
         ? hints.map(hint =>

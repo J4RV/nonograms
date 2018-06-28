@@ -19,40 +19,48 @@ const loadNonogram = ({rowsHints, columnsHints}) => ({
   nonogram: new Nonogram(rowsHints.length, columnsHints.length)
 })
 
-const initState = {...emptyNonogram(0, 0), lastClickSquareValue: true, mouseIsDown: false}
+const initState = {...emptyNonogram(0, 0), lastClickSquareValue: true, mouseIsDown: false, isCorrect: false}
+
+const withIsCorrect = (state) => {
+  const {nonogram, rowsHints, columnsHints} = state
+  // if (nonogram == null || rowHints === null || columnHints == null) return state
+  return {...state, isCorrect: nonogram.isCorrect(rowsHints, columnsHints)}
+}
 
 export default (state = initState, action) => {
   switch (action.type) {
     case TOGGLE_SQUARE:
       let {row, column} = action.payload
-      return {
+      return withIsCorrect({
         ...state,
         lastClickSquareValue: state.nonogram.get(row, column),
         nonogram: state.nonogram.toggle(row, column)
-      }
+      })
 
     case INVERT:
-      return {
+      return withIsCorrect({
         ...state,
         nonogram: state.nonogram.invert()
-      }
+      })
 
     case LOAD_LEVEL:
       let {level, sublevel} = action.payload
-      return {
+      let loadedNonogram = loadNonogram(levels[level][sublevel])
+      return withIsCorrect({
         ...state,
-        ...loadNonogram(levels[level][sublevel])
-      }
+        ...loadedNonogram
+      })
 
     case EMPTY_LEVEL:
       let {height, width} = action.payload
-      return {
+      return withIsCorrect({
         ...state,
         ...emptyNonogram(height, width)
-      }
+      })
 
     case CLEAR_NONOGRAM:
-      return {...state, nonogram: new Nonogram(state.nonogram.height, state.nonogram.width)}
+      return withIsCorrect(
+        {...state, nonogram: new Nonogram(state.nonogram.height, state.nonogram.width)})
 
     case SET_MOUSE_DOWN:
       return {...state, mouseIsDown: action.payload.mouseIsDown}

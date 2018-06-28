@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import withStyles from 'react-jss'
 import Button from '@material-ui/core/Button'
 import ConfirmationButton from './subcomponents/ConfirmationButton'
@@ -34,11 +34,24 @@ const getNextLevelIndexes = (level, sublevel) => {
   }
 }
 
-const Buttons = ({level, sublevel, loadLevel, clear, classes}) => {
+const NextButton = withRouter(({loadLevel, nextLevel, nextSublevel, disabled, history, classes}) => (
+  <Button
+    className={classes.button}
+    color='primary'
+    variant='raised'
+    disabled={disabled}
+    onClick={() => {
+      history.push(`/level/${nextLevel}/sublevel/${nextSublevel}`)
+      loadLevel(nextLevel, nextSublevel)
+    }}
+  >
+    Next
+  </Button>
+))
+
+const Buttons = ({level, sublevel, loadLevel, clear, classes, isCorrect}) => {
   const nextLevelIndexes = getNextLevelIndexes(level, sublevel)
   if (nextLevelIndexes == null) return <h3>No more levels!</h3>
-
-  const {nextLevel, nextSublevel} = getNextLevelIndexes(level, sublevel)
   return (
     <div>
       <ConfirmationButton
@@ -50,18 +63,12 @@ const Buttons = ({level, sublevel, loadLevel, clear, classes}) => {
         variant='outlined'
         message='Do you really want to start over?'
       />
-      <Link
-        to={`/level/${nextLevel}/sublevel/${nextSublevel}`}
-        onClick={() => loadLevel(nextLevel, nextSublevel)}
-      >
-        <Button 
-          className={classes.button} 
-          color='primary' 
-          variant='raised'
-        >
-          Next
-        </Button>
-      </Link>
+      <NextButton
+        {...nextLevelIndexes}
+        loadLevel={loadLevel}
+        classes={classes}
+        disabled={!isCorrect}
+      />
     </div>
   )
 }
@@ -91,12 +98,12 @@ class NonogramLevel extends React.Component {
   }
 
   render () {
-    const {match, loadLevel, clear, classes} = this.props
+    const {match, loadLevel, clear, classes, isCorrect} = this.props
     const {level, sublevel} = match.params
     return <div className={classes.container}>
       <LevelName level={level} sublevel={sublevel} />
       <Nonogram />
-      <Buttons level={level} sublevel={sublevel} loadLevel={loadLevel} clear={clear} classes={classes} />
+      <Buttons level={level} sublevel={sublevel} loadLevel={loadLevel} clear={clear} classes={classes} isCorrect={isCorrect} />
     </div>
   }
 }

@@ -8,6 +8,7 @@ const isDev = process.env.WEBPACK_SERVE === true
 
 module.exports = {
   mode: isDev ? 'development' : 'production',
+  hot: true,
 
   entry: './src/index.jsx',
   output: {

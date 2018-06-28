@@ -10,7 +10,6 @@ import store from './store'
 import theme from './theme'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 require('./global.css')
-require('./prototypes/arrayEquals')
 
 // To remove the 300ms lag for touchscreen devices
 if ('addEventListener' in document) {

@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import withStyles from 'react-jss'
+import {arrayEquals} from '../prototypes/arrayEquals'
 
 const styles = theme => ({
   rowHints: {
@@ -27,7 +28,7 @@ const styles = theme => ({
 })
 
 const RowHints = ({classes, hints, marked}) => (
-  <div className={`${classes.rowHints} ${classes[marked.equals(hints) ? 'right' : 'wrong']}`}>
+  <div className={`${classes.rowHints} ${classes[arrayEquals(marked, hints) ? 'right' : 'wrong']}`}>
     {
       hints && hints.length > 0
         ? hints.map(hint =>
