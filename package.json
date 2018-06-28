@@ -12,7 +12,7 @@
     "typescript": "^2.8.3"
   },
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --hot",
     "build": "webpack",
     "newaction": "node scripts/newaction.js"
   },
